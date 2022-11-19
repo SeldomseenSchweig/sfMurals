@@ -4,11 +4,9 @@ import "./App.css";
 import Home from "./Home";
 import NavBar from "./navbar/NavBar";
 import { Route, Switch } from "react-router-dom";
-import Company from "./companies/Company";
-import Companies from "./companies/Companies";
-import Jobs from "./jobs/Jobs";
+
 import SignupForm from "./SignupForm";
-import JoblyApi from "../frontend/api";
+import sfMuralsApi from "../frontend/api";
 import LoginForm from "./LogInForm";
 import ProfileEditForm from "./Profile";
 import jwt from "jsonwebtoken";
@@ -27,7 +25,7 @@ function App() {
 useEffect(() => {
   if(token && token.token){
     let info = jwt.decode(token.token)
-    JoblyApi.token = token.token
+    sfMuralsApi.token = token.token
     getUser(info.username);
     
 
@@ -37,17 +35,17 @@ useEffect(() => {
 , [token]);
 
   async function register (values){
-  let new_token = await JoblyApi.register(values);
+  let new_token = await sfMuralsApi.register(values);
   setToken(new_token)
 
 }
 async function login (values){
-    let res = await JoblyApi.login(values);
+    let res = await sfMuralsApi.login(values);
     setToken(res)
     
 }
 async function getUser(username){
-  let user = await JoblyApi.getUser(username);
+  let user = await sfMuralsApi.getUser(username);
   setCurrentUser(user)
   setApplicationIds(new Set(user.user.applications))
 }
@@ -69,7 +67,7 @@ function hasAppliedToJob(id) {
   function apply(id) {
     if (hasAppliedToJob(id)) return;
 
-    JoblyApi.apply({username:currentUser.user.username, jobId:id});
+    sfMuralsApi.apply({username:currentUser.user.username, jobId:id});
     setApplicationIds(new Set([...applicationIds, id]));
 
   }
@@ -89,7 +87,7 @@ function hasAppliedToJob(id) {
             <Route exact path="/">
               <Home />
             </Route>
-            <Route exact path="/companies">
+            {/* <Route exact path="/companies">
               <Companies  />
             </Route>
             <Route path="/companies/:handle">
@@ -97,7 +95,7 @@ function hasAppliedToJob(id) {
             </Route>
             <Route exact path="/jobs">
               <Jobs />
-            </Route>
+            </Route> */}
             <Route exact path="/profile">
               <ProfileEditForm />
             </Route>

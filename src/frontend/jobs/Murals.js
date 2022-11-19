@@ -1,17 +1,18 @@
 import React, {useState, useEffect,useContext } from 'react'
-import JoblyApi from '../api'
+import murallyApi from '../api'
 import { Redirect } from 'react-router-dom';
 import CurrentUserContext from "../CurrentUserContext";
 
 
 import SearchBar from '../SearchBar';
-import JobCard from './JobCard';
+import MuralCard from './MuralCard';
+import sfMuralsApi from '../api';
 
 
 
 
 
-const Jobs = () => {
+const Murals = () => {
 
     const {currentUser} = useContext(CurrentUserContext)
     
@@ -24,15 +25,15 @@ const Jobs = () => {
     if(!currentUser){
         return <Redirect to="/"/>
     }
-    const [jobs, setJobs] = useState([]);
+    const [murals, setMurals] = useState([]);
 
 
     useEffect(() => {
 
-        async function getJobs() {
+        async function getMurals() {
             try {
-                let jobs = await JoblyApi.getJobs();
-                setJobs(jobs);    
+                let murals = await sfMuralsApi.getmurals();
+                setmurals(murals);    
             } catch (error) {
                 console.log(error)
                 
@@ -41,14 +42,14 @@ const Jobs = () => {
             
         
         }
-        getJobs();
+        getmurals();
 
       }, []);
 
-    let jobList = Object.values(jobs)
+    let muralList = Object.values(murals)
     async function search(name) {
-        let jobs = await JoblyApi.getJobs(name);
-        setJobs(jobs);
+        let murals = await murallyApi.getmurals(name);
+        setMurals(murals);
         }
 
 
@@ -59,15 +60,15 @@ const Jobs = () => {
         
         <div>
             <SearchBar search={search} />
-            { jobList.map(job => (
+            { muralList.map(mural => (
             
                 
-                <JobCard values={{
-                    id:job.id,
-                    companyName:job.companyName,
-                    equity:job.equity,
-                    salary:job.salary,
-                    title:job.title  }}/>
+                <MuralCard values={{
+                    id:mural.id,
+                    muralAddress:mural.address,
+                    artist:mural.artist,
+                    year:mural.year,
+                    neighborhood:mural.neighborhood  }}/>
                 
             ))}
             </div>
@@ -77,4 +78,4 @@ const Jobs = () => {
             
 } 
 
-export default Jobs;
+export default Murals;

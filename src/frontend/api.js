@@ -10,7 +10,7 @@ const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
  *
  */
 
-class JoblyApi {
+class sfMuralsApi {
   // the token for interactive with the API will be stored here.
   static token;
 
@@ -20,7 +20,7 @@ class JoblyApi {
     //there are multiple ways to pass an authorization token, this is how you pass it in the header.
     //this has been provided to show you another way to pass the token. you are only expected to read this code for this project.
     const url = `${BASE_URL}/${endpoint}`;
-    const headers = { Authorization: `Bearer ${JoblyApi.token}` };
+    const headers = { Authorization: `Bearer ${sfMuralsApi.token}` };
     const params = (method === "get")
         ? data
         : {};
@@ -132,4 +132,4 @@ class JoblyApi {
 
 
 
-export default JoblyApi;
+export default sfMuralsApi;

@@ -35,11 +35,9 @@ function NavBar({logout}) {
         <Nav className="ml-auto" navbar>
           
           <NavItem>
-            <NavLink to="/companies">Mural Search</NavLink>
+            <NavLink to="/muralSearch">Mural Search</NavLink>
           </NavItem>
-          <NavItem>
-            <NavLink to="/jobs">Jobs</NavLink>
-          </NavItem>
+
           <NavItem>
             <NavLink to="/profile"> Profile</NavLink>
           </NavItem>  
