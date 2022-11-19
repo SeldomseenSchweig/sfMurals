@@ -1,6 +1,9 @@
 import axios from "axios";
+import { apiKey } from "../apiKey";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
+const MURAL_URL = `https://data.sfgov.org/resource/wg8w-68vc.json?$$app_token=${apiKey}`
+
 
 /** API Class.
  *
@@ -38,25 +41,11 @@ class sfMuralsApi {
 
   /** Get details on a company by handle. */
 
-  static async getCompany(handle) {
-    let res = await this.request(`companies/${handle}`);
-    return res.company;
-  }
-/** Get details on a all companies. */
 
-  static async getCompanies(filter){
-    let data = {}
-    if (filter){
-      data = {name:filter}
-    }
-    let res = await this.request(`companies`, data);
-    return res.companies;
-
-  }
 
   /** Get details on a all jobs. */
 
-    static async getJobs(filter){
+    static async getMurals(filter){
       let data = {}
       if (filter){
         data = {title:filter}
