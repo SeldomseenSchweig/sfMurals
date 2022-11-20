@@ -32,8 +32,8 @@ const Murals = () => {
 
         async function getMurals() {
             try {
-                let murals = await sfMuralsApi.getmurals();
-                setmurals(murals);    
+                let murals = await sfMuralsApi.getMurals();
+                setMurals(murals);    
             } catch (error) {
                 console.log(error)
                 
@@ -42,13 +42,12 @@ const Murals = () => {
             
         
         }
-        getmurals();
+        getMurals();
 
       }, []);
 
-    let muralList = Object.values(murals)
-    async function search(name) {
-        let murals = await murallyApi.getmurals(name);
+    async function search(artist) {
+        let murals = await sfMuralsApi.getmurals();
         setMurals(murals);
         }
 
@@ -60,11 +59,11 @@ const Murals = () => {
         
         <div>
             <SearchBar search={search} />
-            { muralList.map(mural => (
+            { murals.map(mural => (
             
                 
                 <MuralCard values={{
-                    id:mural.id,
+                    
                     muralAddress:mural.address,
                     artist:mural.artist,
                     year:mural.year,

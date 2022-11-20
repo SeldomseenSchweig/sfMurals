@@ -4,6 +4,7 @@ import "./App.css";
 import Home from "./Home";
 import NavBar from "./navbar/NavBar";
 import { Route, Switch } from "react-router-dom";
+import Murals from "./murals/Murals";
 
 import SignupForm from "./SignupForm";
 import sfMuralsApi from "../frontend/api";
@@ -87,15 +88,9 @@ function hasAppliedToJob(id) {
             <Route exact path="/">
               <Home />
             </Route>
-            {/* <Route exact path="/companies">
-              <Companies  />
+             <Route exact path="/murals">
+               <Murals />
             </Route>
-            <Route path="/companies/:handle">
-              <Company cantFind="/companies" />
-            </Route>
-            <Route exact path="/jobs">
-              <Jobs />
-            </Route> */}
             <Route exact path="/profile">
               <ProfileEditForm />
             </Route>

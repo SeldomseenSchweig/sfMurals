@@ -37,7 +37,9 @@ function NavBar({logout}) {
           <NavItem>
             <NavLink to="/muralSearch">Mural Search</NavLink>
           </NavItem>
-
+          <NavItem>
+            <NavLink to="/murals">All Murals</NavLink>
+          </NavItem>
           <NavItem>
             <NavLink to="/profile"> Profile</NavLink>
           </NavItem>  
