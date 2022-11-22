@@ -16,7 +16,7 @@ function Home() {
               <h1 className="font-weight-bold">
                   SF Murals
               </h1>
-              <h3> All the jobs in one, convenient place. </h3> 
+              <h3> Find The Mural You Are Looking For </h3> 
               { user.currentUser? <h2> Welcome Back {user.currentUser.user.firstName} </h2>:  <>
               <Link to="/signup"> <button  className="btn btn-primary b"> Sign Up</button></Link> 
              <Link to="/login">  <button  className="btn btn-primary b"> Login</button></Link></>}

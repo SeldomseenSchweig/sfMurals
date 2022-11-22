@@ -9,6 +9,7 @@ import {
 
 
 const MuralCard = ({values}) =>{
+    console.log(values)
 
 
     
@@ -18,7 +19,7 @@ const MuralCard = ({values}) =>{
 
     const handleSubmit = (e) =>{
         e.preventDefault();
-
+        console.log('hello')
     }
 
 
@@ -41,10 +42,14 @@ const MuralCard = ({values}) =>{
                             </CardHeader>
                             <CardBody>
                             
-                                <CardText> Equity: {values.artist}</CardText>
+                                <CardText> Artist {values.artist}</CardText>
                             
 
                                 <CardText> Year Painted {values.year} </CardText>
+                                <CardText> Address {values.muralAddress} </CardText>
+                                <CardText> Neighborhood {values.neighborhood} </CardText>
+
+
                                 
                                 
                             </CardBody>

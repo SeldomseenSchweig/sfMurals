@@ -14,9 +14,9 @@ VALUES ('testuser',
         'joel@joelburton.com',
         TRUE);
 
-INSERT INTO murals (artist,street_address,city,us_state,zip_code,year,cultural_district,long,lat,neighborhood_id) 
+INSERT INTO murals (artist,street_address,city,us_state,zip_code,year,cultural_district,long,lat,neighborhood) 
 VALUES
-        ("Rattlecan Blasters (Cameron Moberg and Aaron Vickery)",'65 Oak Grove Street', 'San Francisco','California',94107,'2009/10','SoMa Pilipinas Filipino Cultural District;Leather & LGBTQ Cultural District',-122.40164796899994, 37.77755298100004,'South of Market')
+        ('Rattlecan Blasters (Cameron Moberg and Aaron Vickery)','65 Oak Grove Street', 'San Francisco','California',94107,'2009/10','SoMa Pilipinas Filipino Cultural District;Leather & LGBTQ Cultural District',-122.40164796899994, 37.77755298100004,'South of Market')
         ,('Wes Wong','835 Pacific Avenue','San Francisco','California',94133,'2010/11',NULL,-122.40907802399994, 37.79643900100007, 'Chinatown')
         ,('Tirso Gonzalez','1089 Market Street','San Francisco','California',94103,'2010/11','SoMa Pilipinas Filipino Cultural District',-122.41189098999997, 37.780426004000056,'South of Market')
         ,('Bryana Fleming','4901-4911 3rd Street','San Francisco','California',94124,'2009/10','African American Arts and Cultural District',-122.390731965, 37.73366701200007,'Hunters Point')
@@ -37,7 +37,7 @@ VALUES
         ,('Vera Lowdermilk','1 Lowell Street','San Francisco','California',94112,'2010/11',NULL, -122.44612402399997, 37.71128200800007,'Crocker-Amazon')
         ,('Francisco Aquino','2700 24th Street','San Francisco','California',94110,'2014/15','Calle 24 Latino Cultural District', -122.40669102499999, 37.75314798000005,'The Mission')
         ,('Francisco Twick Aquino','900 Vermont Street','San Francisco','California',94107,'2011/12',NULL, -122.40385681599997, 37.75791557700006,'Portrero Hill')
-        ,(`Vera Lowdermilk`,'93 Monterey Boulevard','San Francisco','California',94131,'2010/11',NULL, -122.43738303999997, 37.731404988000065, 'Twin Peaks')
+        ,('Vera Lowdermilk','93 Monterey Boulevard','San Francisco','California',94131,'2010/11',NULL, -122.43738303999997, 37.731404988000065, 'Twin Peaks')
         ,('Rattlecan Blasters (Cameron Moberg and Aaron Vickery)','423 Mount Vernon Avenue','San Francisco','California',94112,'2010/11',NULL, -122.44892299299994, 37.718349000000046,'Oceanview/Ingleside')
         ,('Jason Jagel','2400 Cesar Chavez','San Francisco','California',94124,'2019',NULL, -122.40112996799996, 37.74991600200008,'Hunters Point')
         ,('Ian Ross','41 Freelon Street','San Francisco','California',94107,'2013/14','SoMa Pilipinas Filipino Cultural District', -122.39623501999996, 37.779183010000054,'South of Market')
@@ -79,7 +79,7 @@ VALUES
         ,('Shawn Bullen','600 Kearny Street','San Francisco','California',94108,'2013/14',NULL, -122.40445599099998, 37.79369401200006, 'Chinatown')
         ,('Jet Martinez','925 Larkin Street','San Francisco','California',94109,'2009/10',NULL, -122.41846801799994, 37.78643901400005, 'Tenderloin')
         ,('Max Ehrman','1000 Potrero Avenue','San Francisco','California',94110,'2009/10','Calle 24 Latino Cultural District', -122.40693703399995, 37.75598198500006,'The Mission')
-        ,('285 Bartlett Street','San Francisco','California',94110,'2017/2018',NULL, -122.41927502799994, 37.75249599400007,'The Mission')
+        ,('Michelle Fleck','285 Bartlett Street','San Francisco','California',94110,'2017/2018',NULL, -122.41927502799994, 37.75249599400007,'The Mission')
         ,('Kristin Brandt','355 9th Street','San Francisco','California',94103,'2010/11','SoMa Pilipinas Filipino Cultural District;Leather & LGBTQ Cultural District', -122.41058795499998, 37.77303230000007,'South of Market')
         ,('Bryanna Fleming','633 Geary Boulevard','San Francisco','California',94109,'2013/14','Japantown Cultural District', -122.42658471699997, 37.785223028000075, 'Western Addition')
         ,('Meagan Spendlove','1552 Ocean Avenue','San Francisco','California',94112,'2011/12',NULL, -122.45905201999994, 37.72475298400008, 'Twin Peaks')

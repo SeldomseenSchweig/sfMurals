@@ -10,18 +10,33 @@ CREATE TABLE users (
   is_admin BOOLEAN NOT NULL DEFAULT FALSE
 );
 
+CREATE TABLE murals(
+  id SERIAL PRIMARY KEY,
+  artist TEXT,
+  street_address TEXT,
+  city TEXT,
+  us_state TEXT,
+  zip_code INT,
+  year TEXT,
+  cultural_district TEXT,
+  long INT,
+  lat INT,
+  neighborhood TEXT
 
-
-CREATE TABLE neighborhoods (
-  id INT PRIMARY KEY,
-  neighborhood TEXT NOT NULL
 
 );
 
 
+-- CREATE TABLE neighborhoods (
+--   id INT PRIMARY KEY,
+--   neighborhood TEXT NOT NULL
+
+-- );
+
+
 CREATE TABLE tours (
   id SERIAL PRIMARY KEY,
-  mural INT,
+  mural_id INT REFERENCES murals(id),
   user_username text REFERENCES users(username)
 
 );

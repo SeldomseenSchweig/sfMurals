@@ -2,7 +2,7 @@ import axios from "axios";
 import { apiKey } from "../apiKey";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
-const MURAL_URL = `https://data.sfgov.org/resource/wg8w-68vc.json?`
+// const MURAL_URL = `https://data.sfgov.org/resource/wg8w-68vc.json?`
 
 
 /** API Class.
@@ -18,7 +18,7 @@ class sfMuralsApi {
   //There are three routes, to the database, the SF Mural API and the Googles maps API
   static token;
 
-  static async userRequest(endpoint, data = {}, method = "get") {
+  static async request(endpoint, data = {}, method = "get") {
     console.debug("API Call:", endpoint, data, method);
 
     //there are multiple ways to pass an authorization token, this is how you pass it in the header.
@@ -37,24 +37,8 @@ class sfMuralsApi {
       throw Array.isArray(message) ? message : [message];
     }
   }
-  static async muralRequest(endpoint, data = {}, method = "get") {
-    console.debug("API Call:", endpoint, data, method);
+  
 
-    //there are multiple ways to pass an authorization token, this is how you pass it in the header.
-    //this has been provided to show you another way to pass the token. you are only expected to read this code for this project.
-    const url = `${MURAL_URL}`;
-    const params = (method === "get")
-        ? data
-        : {};
-
-    try {
-      return (await axios({ url, method, data, params })).data;
-    } catch (err) {
-      console.error("API Error:", err.response);
-      let message = err.response.data.error.message;
-      throw Array.isArray(message) ? message : [message];
-    }
-  }
 
   // Individual API routes
 
@@ -69,7 +53,7 @@ class sfMuralsApi {
       if (filter){
         data = {title:filter}
       }
-    let res = await this.muralRequest();
+    let res = await this.request('murals');
     return res;
   }
     /**register website */
@@ -84,7 +68,7 @@ class sfMuralsApi {
       email:values.email
     }
 
-    let res = this.userRequest('auth/register', data, 'post' )
+    let res = this.request('auth/register', data, 'post' )
   return res  }
 
     /** login. */
@@ -97,7 +81,7 @@ class sfMuralsApi {
       password:password,
     }
     
-      let res = this.userRequest('auth/token', data, 'post' )
+      let res = this.request('auth/token', data, 'post' )
       
       return res
       
@@ -105,7 +89,7 @@ class sfMuralsApi {
 
   static async getUser(testuser){
 
-    let res = this.userRequest(`users/${testuser}`)
+    let res = this.request(`users/${testuser}`)
 
     return res
 
@@ -117,7 +101,7 @@ class sfMuralsApi {
     const {username, jobId} = values;
     const data = {username:username, id:jobId}
 
-    let res = this.userRequest(`users/${username}/jobs/${jobId}`, data, 'post')
+    let res = this.request(`users/${username}/jobs/${jobId}`, data, 'post')
     return res
 
   }
