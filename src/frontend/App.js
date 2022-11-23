@@ -5,6 +5,7 @@ import Home from "./Home";
 import NavBar from "./navbar/NavBar";
 import { Route, Switch } from "react-router-dom";
 import Murals from "./murals/Murals";
+import MuralAdd from "./murals/MuralAdd";
 
 import SignupForm from "./SignupForm";
 import sfMuralsApi from "../frontend/api";
@@ -96,6 +97,9 @@ function hasAppliedToJob(id) {
             </Route>
             <Route exact path="/signup">
               <SignupForm register={register}/>
+            </Route>
+            <Route exact path="/muralAdd">
+              <MuralAdd />
             </Route>
             <Route exact path="/login">
               <LoginForm login={login}/>

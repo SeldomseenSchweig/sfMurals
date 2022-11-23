@@ -50,7 +50,7 @@ const Murals = () => {
         }
 
         const[pageNumber, setPageNumber] = useState(0)
-        const muralsPerPage = 5;
+        const muralsPerPage = 6;
         const pagesVisited = pageNumber * muralsPerPage
         
         const displayMurals = murals.slice(pagesVisited, pagesVisited + muralsPerPage)
@@ -67,16 +67,18 @@ const Murals = () => {
 
         <>
         <SearchBar search={search} />
-        <div className='d-md-flex justify-content-center flex' >
+        <div className='flex-parent' >
             
                                  
                         {displayMurals.map(mural => (
                             
-                                <MuralCard values={{
+                               <div className='flex-child'> 
+                                   <MuralCard values={{
                                 muralAddress:mural.street_address,
                                 artist:mural.artist,
                                 year:mural.year,
                                 neighborhood:mural.neighborhood  }}/>
+                                </div>
 
                             ))}
 
