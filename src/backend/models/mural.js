@@ -42,21 +42,19 @@ const {
        * Returns [{ artist, street_address, year, numEmployees, cultural_district }, ...]
        * */
     
-      static async findAll(searchFilters = {}) {
+      static async findAll() {
         let query = `SELECT artist,
                             street_address,
                             year, neighborhood,
                             cultural_district
-                     FROM murals`;
+                     FROM murals 
+                     ORDER BY artist`;
   
-    
-
-    
         // Finalize query and return results
-    
-        query += " ORDER BY artist";
+          
+         
         const muralsRes = await db.query(query);
-        console.log(muralsRes)
+        console.log(muralsRes);
         return muralsRes.rows;
       }
     

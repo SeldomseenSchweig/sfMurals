@@ -9,7 +9,6 @@ import {
 
 
 const MuralCard = ({values}) =>{
-    console.log(values)
 
 
     

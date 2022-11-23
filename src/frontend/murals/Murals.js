@@ -1,6 +1,9 @@
 import React, {useState, useEffect,useContext } from 'react'
 import { Redirect } from 'react-router-dom';
 import CurrentUserContext from "../CurrentUserContext";
+import ReactPaginate from 'react-paginate';
+import "./Murals.css";
+
 
 
 import SearchBar from '../SearchBar';
@@ -15,16 +18,11 @@ const Murals = () => {
 
     const {currentUser} = useContext(CurrentUserContext)
     
-
-
-  
-
-
-    
     if(!currentUser){
         return <Redirect to="/"/>
     }
     const [murals, setMurals] = useState([]);
+
 
 
     useEffect(() => {
@@ -46,31 +44,62 @@ const Murals = () => {
 
       }, []);
 
-    async function search(artist) {
+    async function search() {
         let murals = await sfMuralsApi.getmurals();
         setMurals(murals);
         }
-        console.log(murals)
+
+        const[pageNumber, setPageNumber] = useState(0)
+        const muralsPerPage = 5;
+        const pagesVisited = pageNumber * muralsPerPage
+        
+        const displayMurals = murals.slice(pagesVisited, pagesVisited + muralsPerPage)
+        console.log(displayMurals)
+        const pageCount = Math.ceil(murals.length/muralsPerPage)
+        const changePage = ({selected}) =>{
+            setPageNumber(selected)
+
+        }
+
 
 
     return (
 
-        
-        <div>
-            <SearchBar search={search} />
-            {murals.map(mural => (
+        <>
+        <SearchBar search={search} />
+        <div className='d-md-flex justify-content-center flex' >
             
-                
-                <MuralCard values={{
-                    
-                    muralAddress:mural.street_address,
-                    artist:mural.artist,
-                    year:mural.year,
-                    neighborhood:mural.neighborhood  }}/>
-                
-            ))}
+                                 
+                        {displayMurals.map(mural => (
+                            
+                                <MuralCard values={{
+                                muralAddress:mural.street_address,
+                                artist:mural.artist,
+                                year:mural.year,
+                                neighborhood:mural.neighborhood  }}/>
+
+                            ))}
+
             </div>
 
+            <div>
+            <ReactPaginate
+                previousLabel={"Previous"}
+                nextLabel={"Next"}
+                pageCount={pageCount}
+                onPageChange={changePage}
+                containerClassName={"paginationBttns"}
+                previousLinkClassName={"previousBttn"}
+                nextLinkClassName={"nextBttn"}
+                disabledLinkClassName={"paginationDisabled"}
+                activeClassName={"paginationActive"}
+            />
+
+            </div>
+
+
+
+            </>
 
         )
             

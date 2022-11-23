@@ -1,5 +1,5 @@
 import axios from "axios";
-import { apiKey } from "../apiKey";
+// import { apiKey } from "../apiKey";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
 // const MURAL_URL = `https://data.sfgov.org/resource/wg8w-68vc.json?`
@@ -24,7 +24,7 @@ class sfMuralsApi {
     //there are multiple ways to pass an authorization token, this is how you pass it in the header.
     //this has been provided to show you another way to pass the token. you are only expected to read this code for this project.
     const url = `${BASE_URL}/${endpoint}`;
-    const headers = { Authorization: `Bearer ${sfMuralsApi.token}` };
+    const headers = { Authorization: `Bearer ${sfMuralsApi.token}`};
     const params = (method === "get")
         ? data
         : {};
@@ -48,12 +48,14 @@ class sfMuralsApi {
 
   /** Get details on a all jobs. */
 
-    static async getMurals(filter){
+    static async getMurals(){
       let data = {}
-      if (filter){
-        data = {title:filter}
+      if (data){
+        
       }
-    let res = await this.request('murals');
+
+    let res = await this.request(`murals`);
+    
     return res;
   }
     /**register website */
@@ -96,15 +98,14 @@ class sfMuralsApi {
   }
 
 
-  static async apply(values){
-    console.log(values)
-    const {username, jobId} = values;
-    const data = {username:username, id:jobId}
+  // static async apply(){
+  //   // const {username, jobId} = values;
+  //   const data = {username:username, id:jobId}
 
-    let res = this.request(`users/${username}/jobs/${jobId}`, data, 'post')
-    return res
+  //   let res = this.request(`users/${username}/jobs/${jobId}`, data, 'post')
+  //   return res
 
-  }
+  // }
  
   static async update (username,data){
    
