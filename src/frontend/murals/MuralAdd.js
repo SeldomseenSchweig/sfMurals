@@ -31,7 +31,7 @@ const MuralAdd =({addItem})=>{
     return (
 
         <form onSubmit={handleSubmit} >
-            <label htmlFor='artist'> Artist Namw</label>
+            <label htmlFor='artist'> Artist Name</label>
             <input 
             id='artist'
             name='artist'

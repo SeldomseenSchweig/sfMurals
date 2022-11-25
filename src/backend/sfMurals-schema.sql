@@ -21,7 +21,8 @@ CREATE TABLE murals(
   cultural_district TEXT,
   long INT,
   lat INT,
-  neighborhood TEXT
+  neighborhood TEXT,
+  image TEXT
 
 
 );
