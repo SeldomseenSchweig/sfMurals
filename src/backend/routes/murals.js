@@ -5,9 +5,11 @@
 const jsonschema = require("jsonschema");
 
 const express = require("express");
-const { ensureCorrectUserOrAdmin, ensureAdmin } = require("../middleware/auth");
+const { ensureCorrectUserOrAdmin, ensureAdmin, ensureLoggedIn } = require("../middleware/auth");
 const { BadRequestError } = require("../expressError");
 const Mural = require("../models/mural");
+const muralNewSchema = require("../schemas/muralNew.json");
+
 
 const router = express.Router();
 
@@ -29,9 +31,25 @@ router.post("/", ensureAdmin, async function (req, res, next) {
       return next(err);
     }
   });
+  router.post("/muralSuggest", ensureLoggedIn, async function (req, res, next) {
+    try {
+      const validator = jsonschema.validate(req.body, muralNewSchema);
+      if (!validator.valid) {
+        const errs = validator.errors.map(e => e.stack);
+        throw new BadRequestError(errs);
+      }
+      console.log("muralsuggest")
+  
+      const mural = await Mural.suggest(req.body);
+      
+      return res.status(201).json({ mural });
+    } catch (err) {
+      return next(err);
+    }
+  });
   
   
-  /** GET / => { users: [ {username, firstName, lastName, email }, ... ] }
+  /** GET / => { murals: [ {artist, street_address, neighborhood, date }, ... ] }
    *
    * Returns list of all users.
    *

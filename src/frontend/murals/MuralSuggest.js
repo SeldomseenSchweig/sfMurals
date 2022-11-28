@@ -1,14 +1,22 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
+import CurrentUserContext from "../CurrentUserContext";
+import { Redirect } from 'react-router-dom';
 
 
 
 
 
-const MuralAdd =()=>{
+
+const MuralSuggest =({suggest})=>{
+
+    const {currentUser} = useContext(CurrentUserContext)    
+    if(!currentUser){
+        return <Redirect to="/"/>
+    }
     const INITIAL_STATE = {
         artst:"",
-        address:"",
-        img:""
+        street_address:"",
+        img:"",
     }
     const [formData, setFormData] = useState([INITIAL_STATE])
     const handleChange = (e) =>{
@@ -21,6 +29,11 @@ const MuralAdd =()=>{
     }
     const handleSubmit =(e) =>{
         e.preventDefault();
+        formData.user_id = currentUser.user.username
+        // console.log(currentUser.user.username)
+        console.log(formData)
+
+        suggest(formData)
         setFormData(INITIAL_STATE)
 
     } 
@@ -38,23 +51,23 @@ const MuralAdd =()=>{
             value={formData.artist}
             onChange={handleChange}
             />
-            <label htmlFor='address'> Address </label>
+            <label htmlFor='street_address'> Address </label>
             <input 
             type="text"
-            name='address'
+            name='street_address'
             onChange={handleChange}
-            value={formData.address}
-            id="address"
+            value={formData.street_address}
+            id="street_address"
 
             />
 
-            <label htmlFor='Image'> Image </label>
+            <label htmlFor='img'> Image </label>
             <input 
             type="text"
-            name='image'
+            name='img'
             onChange={handleChange}
-            value={formData.image}
-            id="image"
+            value={formData.img}
+            id="img"
 
             />
           <button>Submit</button>  
@@ -65,4 +78,4 @@ const MuralAdd =()=>{
 
 }
 
-export default MuralAdd;
+export default MuralSuggest;

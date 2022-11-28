@@ -34,7 +34,7 @@ function NavBar({logout}) {
 
         <Nav className="ml-auto" navbar>
           <NavItem>
-            <NavLink to="/muralAdd">Add a Mural</NavLink>
+            <NavLink to="/muralSuggest">Suggest a Mural</NavLink>
           </NavItem>
           <NavItem>
             <NavLink to="/murals">All Murals</NavLink>

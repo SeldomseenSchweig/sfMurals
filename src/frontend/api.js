@@ -58,6 +58,19 @@ class sfMuralsApi {
     
     return res;
   }
+  static async suggest(values){
+
+    let data = {
+      artist:values.artist,
+      street_address:values.street_address,
+      img:values.img,
+      user_id:values.user_id
+    }
+
+  let res = await this.request(`murals/muralSuggest`,data,'post' );
+  
+  return res;
+}
     /**register website */
 
   static async register(values){

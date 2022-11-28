@@ -12,7 +12,7 @@ CREATE TABLE users (
 
 CREATE TABLE murals(
   id SERIAL PRIMARY KEY,
-  artist TEXT,
+  artist VARCHAR(100),
   street_address TEXT,
   city TEXT,
   us_state TEXT,
@@ -28,18 +28,14 @@ CREATE TABLE murals(
 );
 
 
--- CREATE TABLE neighborhoods (
---   id INT PRIMARY KEY,
---   neighborhood TEXT NOT NULL
-
--- );
 
 
-CREATE TABLE tours (
+CREATE TABLE suggestedMurals(
   id SERIAL PRIMARY KEY,
-  mural_id INT REFERENCES murals(id),
-  user_username text REFERENCES users(username)
-
+  artist TEXT,
+  street_address TEXT,
+  img TEXT,
+  user_id VARCHAR(25) REFERENCES users(username)
 );
 
 

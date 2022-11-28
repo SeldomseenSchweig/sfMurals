@@ -5,7 +5,7 @@ import Home from "./Home";
 import NavBar from "./navbar/NavBar";
 import { Route, Switch } from "react-router-dom";
 import Murals from "./murals/Murals";
-import MuralAdd from "./murals/MuralAdd";
+import MuralSuggest from "./murals/MuralSuggest";
 
 import SignupForm from "./SignupForm";
 import sfMuralsApi from "../frontend/api";
@@ -57,25 +57,14 @@ function logout() {
   setToken(null);
   
 }
+async function suggest (values){
+  let mural = await sfMuralsApi.suggest(values);
+  console.log(mural)
+  
 
-// function hasAppliedToJob(id) {
+}
 
 
-//   return applicationIds.has(id);
-// }
-
-  /** Apply to a job: make API call and update set of application IDs. */
-  // function apply(id) {
-  //   if (hasAppliedToJob(id)) return;
-
-  //   sfMuralsApi.apply({username:currentUser.user.username, jobId:id});
-  //   setApplicationIds(new Set([...applicationIds, id]));
-
-  // }
-
-//   const addItem = (newItem)=>{
-//     setItems(items =>([...items,{...newItem, id:uuid()} ]))
-// }  
 
 
 
@@ -99,8 +88,8 @@ function logout() {
             <Route exact path="/signup">
               <SignupForm register={register}/>
             </Route>
-            <Route exact path="/muralAdd">
-              <MuralAdd />
+            <Route exact path="/muralSuggest">
+              <MuralSuggest suggest={suggest}/>
             </Route>
             <Route exact path="/login">
               <LoginForm login={login}/>

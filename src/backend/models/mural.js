@@ -32,6 +32,25 @@ const {
     
         return mural;
       }
+      static async suggest({ artist, street_address, img, user_id}) {
+        console.log(artist, street_address, img,user_id)
+    
+        const result = await db.query(
+              `INSERT INTO suggestedMurals
+               (artist, street_address,img,user_id)
+               VALUES ($1, $2, $3,$4)
+               RETURNING artist, street_address,img,user_id`,
+            [
+              artist,
+              street_address,
+              img,
+              user_id
+            ],
+        );
+        const mural = result.rows[0];
+    
+        return mural;
+      }
     
       /** Find all companies (optional filter on searchFilters).
        *

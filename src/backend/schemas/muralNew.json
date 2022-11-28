@@ -15,7 +15,11 @@
       },
       "img": {
         "type": "string"
+      },
+      "user_id": {
+        "type": "string"
       }
+      
 
     },
     "additionalProperties": false,
@@ -24,5 +28,6 @@
       "street_address",
       "img"
     ]
+    
   }
   
