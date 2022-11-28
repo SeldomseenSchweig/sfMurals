@@ -9,6 +9,7 @@ import {
 
 
 const MuralCard = ({values}) =>{
+    console.log(values)
 
 
     
@@ -47,6 +48,7 @@ const MuralCard = ({values}) =>{
                                 <CardText> Year Painted {values.year} </CardText>
                                 <CardText> Address {values.muralAddress} </CardText>
                                 <CardText> Neighborhood {values.neighborhood} </CardText>
+                                <img src={values.img} style={{maxWidth:'100%'}}/>
 
 
                                 

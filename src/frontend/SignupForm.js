@@ -1,9 +1,13 @@
 import React, { useState } from "react";
+import { useHistory } from 'react-router-dom';
+
 import './form.css'
 
 
 
 const Signup = ({register}) =>{
+
+    const history = useHistory()
 
     const initialState = {
         username:"",
@@ -33,8 +37,8 @@ const Signup = ({register}) =>{
         e.preventDefault();
         console.log(formData);
         register(formData);
-        
         setFormData(initialState);
+        history.push('/')
 
     }
 

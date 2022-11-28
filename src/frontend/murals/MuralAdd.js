@@ -4,11 +4,10 @@ import React, {useState} from 'react';
 
 
 
-const MuralAdd =({addItem})=>{
+const MuralAdd =()=>{
     const INITIAL_STATE = {
         artst:"",
         address:"",
-        neigborhood:"",
         img:""
     }
     const [formData, setFormData] = useState([INITIAL_STATE])
@@ -22,7 +21,6 @@ const MuralAdd =({addItem})=>{
     }
     const handleSubmit =(e) =>{
         e.preventDefault();
-        addItem({ ...formData });
         setFormData(INITIAL_STATE)
 
     } 
@@ -50,18 +48,9 @@ const MuralAdd =({addItem})=>{
 
             />
 
-            <label htmlFor='neighborhood'> Neighborhood </label>
-            <input 
-            type="text"
-            name='neighborhood'
-            onChange={handleChange}
-            value={formData.neighborhood}
-            id="neighborhood"
-
-            />
             <label htmlFor='Image'> Image </label>
             <input 
-            type="file"
+            type="text"
             name='image'
             onChange={handleChange}
             value={formData.image}

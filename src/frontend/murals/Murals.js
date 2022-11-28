@@ -50,7 +50,7 @@ const Murals = () => {
         }
 
         const[pageNumber, setPageNumber] = useState(0)
-        const muralsPerPage = 6;
+        const muralsPerPage = 3;
         const pagesVisited = pageNumber * muralsPerPage
         
         const displayMurals = murals.slice(pagesVisited, pagesVisited + muralsPerPage)
@@ -77,7 +77,9 @@ const Murals = () => {
                                 muralAddress:mural.street_address,
                                 artist:mural.artist,
                                 year:mural.year,
-                                neighborhood:mural.neighborhood  }}/>
+                                neighborhood:mural.neighborhood,
+                                img:mural.img
+                                 }}/>
                                 </div>
 
                             ))}

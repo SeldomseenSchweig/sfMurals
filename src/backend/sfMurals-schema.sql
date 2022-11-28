@@ -22,7 +22,7 @@ CREATE TABLE murals(
   long INT,
   lat INT,
   neighborhood TEXT,
-  image TEXT
+  img TEXT
 
 
 );

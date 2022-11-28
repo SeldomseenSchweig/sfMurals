@@ -22,7 +22,6 @@ function App() {
 
   const [currentUser, setCurrentUser] = useState("");
   const [token, setToken] = useLocalStorage(TOKEN_STORAGE_ID);
-  const [applicationIds, setApplicationIds] = useState(new Set([]));
 
 useEffect(() => {
   if(token && token.token){
@@ -49,7 +48,7 @@ async function login (values){
 async function getUser(username){
   let user = await sfMuralsApi.getUser(username);
   setCurrentUser(user)
-  setApplicationIds(new Set(user.user.applications))
+  // setApplicationIds(new Set(user.user.applications))
 }
 
 function logout() {
@@ -59,22 +58,24 @@ function logout() {
   
 }
 
-function hasAppliedToJob(id) {
+// function hasAppliedToJob(id) {
 
 
-  return applicationIds.has(id);
-}
+//   return applicationIds.has(id);
+// }
 
   /** Apply to a job: make API call and update set of application IDs. */
-  function apply(id) {
-    if (hasAppliedToJob(id)) return;
+  // function apply(id) {
+  //   if (hasAppliedToJob(id)) return;
 
-    sfMuralsApi.apply({username:currentUser.user.username, jobId:id});
-    setApplicationIds(new Set([...applicationIds, id]));
+  //   sfMuralsApi.apply({username:currentUser.user.username, jobId:id});
+  //   setApplicationIds(new Set([...applicationIds, id]));
 
-  }
+  // }
 
-
+//   const addItem = (newItem)=>{
+//     setItems(items =>([...items,{...newItem, id:uuid()} ]))
+// }  
 
 
 
@@ -82,7 +83,7 @@ function hasAppliedToJob(id) {
   return (
     <div className="App">
       <BrowserRouter>
-      <CurrentUserContext.Provider value={{currentUser, apply, hasAppliedToJob}}>
+      <CurrentUserContext.Provider value={{currentUser}}>
         <NavBar logout={logout}/>
         <main>
           <Switch>

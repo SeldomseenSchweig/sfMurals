@@ -10,13 +10,13 @@ const {
 
   class Mural{
 
-    static async create({ artist, street_address, year, cultural_district }) {
+    static async create({ artist, street_address,neighborhood='', cultural_district='', long, lat,img}) {
     
         const result = await db.query(
               `INSERT INTO murals
-               (artist, street_address, year, neighborhood, cultural_distric, long, lat)
+               (artist, street_address, neighborhood, cultural_district, long, lat,img)
                VALUES ($1, $2, $3, $4, $5)
-               RETURNING artist, street_address, year, neighborhood, cultural_district, long, lat`,
+               RETURNING artist, street_address, year, neighborhood, cultural_district, long, lat, img`,
             [
               artist,
               street_address,
@@ -24,7 +24,8 @@ const {
               neighborhood,
               cultural_district,
               long,
-              lat
+              lat,
+              img
             ],
         );
         const mural = result.rows[0];
@@ -46,7 +47,8 @@ const {
         let query = `SELECT artist,
                             street_address,
                             year, neighborhood,
-                            cultural_district
+                            cultural_district,
+                            img
                      FROM murals 
                      ORDER BY artist`;
   
@@ -54,7 +56,6 @@ const {
           
          
         const muralsRes = await db.query(query);
-        console.log(muralsRes);
         return muralsRes.rows;
       }
     
