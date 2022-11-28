@@ -48,6 +48,17 @@ class sfMuralsApi {
 
   /** Get details on a all jobs. */
 
+  static async getSuggestedMurals(){
+    let data = {}
+    if (data){
+      
+    }
+
+  let res = await this.request(`murals/adminMurals`);
+  
+  return res;
+}
+
     static async getMurals(){
       let data = {}
       if (data){

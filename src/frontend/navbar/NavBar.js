@@ -5,15 +5,15 @@ import { Navbar, Nav, NavItem } from "reactstrap";
 import CurrentUserContext from "../CurrentUserContext";
 
 
-function NavBar({logout}) {
+function NavBar({logout, suggestedMurals}) {
 
-  const user = useContext(CurrentUserContext)
+  const {currentUser} = useContext(CurrentUserContext)
     
   
   return (
     <div>
 
-      {!user.currentUser ? <Navbar expand="md">
+      {!currentUser ? <Navbar expand="md">
         <NavLink exact to="/" className="navbar-brand">
          SF Murals
         </NavLink>
@@ -33,9 +33,16 @@ function NavBar({logout}) {
         </NavLink>
 
         <Nav className="ml-auto" navbar>
-          <NavItem>
-            <NavLink to="/muralSuggest">Suggest a Mural</NavLink>
-          </NavItem>
+        {!currentUser.user.isAdmin? 
+              <NavItem>
+                <NavLink to="/muralSuggest">Suggest a Mural</NavLink>
+              </NavItem>
+              :          
+              <NavItem>
+                  <NavLink to="/adminMurals"> Currently Suggested Murals ({suggestedMurals ? suggestedMurals.length: "" })</NavLink>
+              </NavItem> 
+          }
+
           <NavItem>
             <NavLink to="/murals">All Murals</NavLink>
           </NavItem>
@@ -43,9 +50,10 @@ function NavBar({logout}) {
             <NavLink to="/profile"> Profile</NavLink>
           </NavItem>  
           <NavItem onClick={logout}> 
-             <NavLink to="/"> Log out of { !user.currentUser ? "" : user.currentUser.user.username} 
-            </NavLink> 
-          </NavItem> 
+             <NavLink to="/"> Log out of { !currentUser ? "" : currentUser.user.username} 
+            </NavLink>
+          </NavItem>
+
           </Nav>
           </Navbar>
 }

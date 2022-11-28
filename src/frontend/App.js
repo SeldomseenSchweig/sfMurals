@@ -6,7 +6,7 @@ import NavBar from "./navbar/NavBar";
 import { Route, Switch } from "react-router-dom";
 import Murals from "./murals/Murals";
 import MuralSuggest from "./murals/MuralSuggest";
-
+import AdminMurals from "./murals/AdminMurals";
 import SignupForm from "./SignupForm";
 import sfMuralsApi from "../frontend/api";
 import LoginForm from "./LogInForm";
@@ -15,6 +15,8 @@ import jwt from "jsonwebtoken";
 import CurrentUserContext from "./CurrentUserContext";
 import useLocalStorage from "./hooks/useLocalStorage";
 import "bootstrap/dist/css/bootstrap.min.css";
+
+
 export const TOKEN_STORAGE_ID = "jobly-token";
 
 
@@ -59,21 +61,39 @@ function logout() {
 }
 async function suggest (values){
   let mural = await sfMuralsApi.suggest(values);
-  console.log(mural)
   
 
 }
+const [suggestedMurals, setSuggestedMurals] = useState([]);
 
 
 
+useEffect(() => {
 
+
+    async function getMurals() {
+        try {
+            let murals = await sfMuralsApi.getSuggestedMurals();
+            
+            setSuggestedMurals(murals);    
+        } catch (error) {
+            console.log(error)
+            
+        }
+
+        
+    
+    }
+    getMurals();
+
+  }, []);
 
 
   return (
     <div className="App">
       <BrowserRouter>
       <CurrentUserContext.Provider value={{currentUser}}>
-        <NavBar logout={logout}/>
+        <NavBar logout={logout} suggestedMurals={suggestedMurals}/>
         <main>
           <Switch>
             <Route exact path="/">
@@ -93,6 +113,9 @@ async function suggest (values){
             </Route>
             <Route exact path="/login">
               <LoginForm login={login}/>
+            </Route>
+            <Route exact path="/adminMurals" >
+              <AdminMurals suggestedMurals={suggestedMurals} setSuggestedMurals={setSuggestedMurals}/>
             </Route>
             
             <Route>

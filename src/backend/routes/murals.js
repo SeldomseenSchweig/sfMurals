@@ -47,6 +47,16 @@ router.post("/", ensureAdmin, async function (req, res, next) {
       return next(err);
     }
   });
+
+  router.get("/adminMurals",ensureAdmin, async function (req, res, next) {
+
+    try {
+      const murals = await Mural.findSuggestedMurals();
+      return res.json( murals );
+    } catch (err) {
+      return next(err);
+    }
+  });
   
   
   /** GET / => { murals: [ {artist, street_address, neighborhood, date }, ... ] }

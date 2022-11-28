@@ -35,7 +35,7 @@ CREATE TABLE suggestedMurals(
   artist TEXT,
   street_address TEXT,
   img TEXT,
-  user_id VARCHAR(25) REFERENCES users(username)
+  user_id VARCHAR(25) REFERENCES users(username) ON DELETE CASCADE
 );
 
 

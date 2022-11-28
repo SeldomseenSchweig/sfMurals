@@ -7,55 +7,25 @@ import "./Murals.css";
 
 
 import SearchBar from '../SearchBar';
-import MuralCard from './MuralCard';
-import sfMuralsApi from '../api';
+import AdminMuralCard from './AdminMuralCard';
 
 
-
-
-
-const Murals = () => {
+const AdminMurals = ({suggestedMurals, setSuggestedMurals}) => {
 
     const {currentUser} = useContext(CurrentUserContext)
     
-    if(!currentUser){
+    if(!currentUser || !currentUser.user.isAdmin){
         return <Redirect to="/"/>
     }
-    const [murals, setMurals] = useState([]);
 
 
-
-    useEffect(() => {
-
-        async function getMurals() {
-            try {
-                let murals = await sfMuralsApi.getMurals();
-                
-                setMurals(murals);    
-            } catch (error) {
-                console.log(error)
-                
-            }
-
-            
-        
-        }
-        getMurals();
-
-      }, []);
-
-    async function search() {
-        let murals = await sfMuralsApi.getMurals();
-        setMurals(murals);
-        }
 
         const[pageNumber, setPageNumber] = useState(0)
         const muralsPerPage = 3;
         const pagesVisited = pageNumber * muralsPerPage
         
-        const displayMurals = murals.slice(pagesVisited, pagesVisited + muralsPerPage)
-        console.log(displayMurals)
-        const pageCount = Math.ceil(murals.length/muralsPerPage)
+        const displayMurals = suggestedMurals.slice(pagesVisited, pagesVisited + muralsPerPage)
+        const pageCount = Math.ceil(suggestedMurals.length/muralsPerPage)
         const changePage = ({selected}) =>{
             setPageNumber(selected)
 
@@ -66,18 +36,16 @@ const Murals = () => {
     return (
 
         <>
-        <SearchBar search={search} />
+        <SearchBar  />
         <div className='flex-parent' >
             
                                  
                         {displayMurals.map(mural => (
                             
                                <div className='flex-child'> 
-                                   <MuralCard values={{
+                                   <AdminMuralCard values={{
                                 muralAddress:mural.street_address,
                                 artist:mural.artist,
-                                year:mural.year,
-                                neighborhood:mural.neighborhood,
                                 img:mural.img
                                  }}/>
                                 </div>
@@ -109,4 +77,4 @@ const Murals = () => {
             
 } 
 
-export default Murals;
+export default AdminMurals;

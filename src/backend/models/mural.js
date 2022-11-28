@@ -51,12 +51,27 @@ const {
     
         return mural;
       }
+
+      static async findSuggestedMurals() {
+        let query = `SELECT artist,
+                            street_address,
+                            img,
+                            user_id
+                     FROM suggestedMurals 
+                     ORDER BY artist`;
+  
+        // Finalize query and return results
+          
+         
+        const muralsRes = await db.query(query);
+        return muralsRes.rows;
+      }
+
+
     
-      /** Find all companies (optional filter on searchFilters).
+      /** Find all Murals (optional filter on searchFilters).
        *
        * searchFilters (all optional):
-       * - minEmployees
-       * - maxEmployees
        * - street_address (will find case-insensitive, partial matches)
        *
        * Returns [{ artist, street_address, year, numEmployees, cultural_district }, ...]
@@ -78,9 +93,9 @@ const {
         return muralsRes.rows;
       }
     
-      /** Given a company artist, return data about company.
+      /** Given a street address, return data murals at that address.
        *
-       * Returns { artist, street_address, year, numEmployees, cultural_district, jobs }
+       * Returns { artist, street_address, year, cultural_district, jobs }
        *   where jobs is [{ id, title, salary, equity }, ...]
        *
        * Throws NotFoundError if not found.
@@ -90,7 +105,8 @@ const {
         const muralRes = await db.query(
             `SELECT
                     street_address,
-                    year, neighborhood,
+                    year, 
+                    neighborhood,
                     cultural_district
             FROM murals"
             WHERE artist = $1`,
