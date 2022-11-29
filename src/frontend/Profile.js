@@ -13,9 +13,8 @@ const ProfileEditForm = () =>{
         firstName:"",
         lastName:""  ,
         password:""})
-    const {currentUser} = useContext(CurrentUserContext)
 
-    if(!currentUser){
+    if(!user.currentUser){
         return <Redirect to="/"/>
     }
 
@@ -58,17 +57,15 @@ const ProfileEditForm = () =>{
             firstName: formData.firstName,
             lastName: formData.lastName,
             email: formData.email,
-            password: formData.password,
           };
          let username = user.currentUser.user.username
-         
-            sfMuralsApi.update(username, profileData)
+         sfMuralsApi.update(username, profileData)
             
         setFormData({ 
             email:"",
         firstName:"",
         lastName:""  ,
-        password:""});
+        });
 
     }
 
@@ -121,19 +118,6 @@ const ProfileEditForm = () =>{
                 value={formData.email} 
                 onChange={handleChanges}/>
             </div>
-
-            <div className="mb-3">
-                <label className="form-label" htmlFor="password">To change user information, verify your password</label>
-                <input
-                className="form-control i"
-                id="password" 
-                type="password" 
-                name="password"
-                placeholder="password"
-                value={formData.password} 
-                onChange={handleChanges}/>
-            </div>
-
 
             <button className="btn btn-primary" >Submit Changes</button>
 

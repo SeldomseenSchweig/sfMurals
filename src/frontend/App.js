@@ -40,8 +40,15 @@ useEffect(() => {
 , [token]);
 
   async function register (values){
-  let new_token = await sfMuralsApi.register(values);
-  setToken(new_token)
+    try {
+      let new_token = await sfMuralsApi.register(values);
+      setToken(new_token)
+      
+    } catch (error) {
+      alert(error[0])
+      
+    }
+
 
 }
 async function login (values){
