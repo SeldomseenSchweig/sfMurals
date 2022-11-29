@@ -27,15 +27,12 @@ const Signup = ({register}) =>{
             [name]:value
         }))
     }
-    // const handleUsernameChange = (e) =>{
-    //     setUsername(e.target.value);
-    // }
-    // const handleEmailChange = (e) =>{
-    //     setEmail(e.target.value);
-    // }
+
     const handleSubmit = (e) =>{
         e.preventDefault();
+        
         register(formData);
+        
         setFormData(initialState);
         history.push('/')
 
@@ -53,7 +50,8 @@ const Signup = ({register}) =>{
                 name="username"
                 placeholder='username' 
                 value={formData.username} 
-                onChange={handleChanges}/>
+                onChange={handleChanges}
+                required/>
             </div>
 
             <div className="mb-3" >
@@ -65,7 +63,8 @@ const Signup = ({register}) =>{
                 name="password"
                 placeholder="password"
                 value={formData.password} 
-                onChange={handleChanges}/>
+                onChange={handleChanges}
+                required/>
             </div>
 
             <div className="mb-3" >
@@ -77,7 +76,9 @@ const Signup = ({register}) =>{
                 name="firstName"
                 placeholder='First Name' 
                 value={formData.firstName} 
-                onChange={handleChanges}/>
+                onChange={handleChanges}
+                required
+                />
             </div>
        
 
@@ -90,7 +91,8 @@ const Signup = ({register}) =>{
                 name="lastName"
                 placeholder='Last Name' 
                 value={formData.lastName} 
-                onChange={handleChanges}/>
+                onChange={handleChanges}
+                required/>
 
             </div>
 
@@ -105,7 +107,8 @@ const Signup = ({register}) =>{
                 name="email"
                 placeholder="email"
                 value={formData.email} 
-                onChange={handleChanges}/>
+                onChange={handleChanges}
+                required/>
             </div>
 
 

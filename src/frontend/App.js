@@ -43,11 +43,15 @@ useEffect(() => {
     try {
       let new_token = await sfMuralsApi.register(values);
       setToken(new_token)
-      
+            
     } catch (error) {
-      alert(error[0])
-      
+      return error
+        
     }
+   
+
+      
+    
 
 
 }

@@ -53,6 +53,7 @@ const ProfileEditForm = () =>{
 
     const handleSubmit = (e) =>{
         e.preventDefault();
+ 
         let profileData = {
             firstName: formData.firstName,
             lastName: formData.lastName,
