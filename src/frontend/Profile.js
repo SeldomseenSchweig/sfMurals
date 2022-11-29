@@ -1,6 +1,6 @@
 import React, {useContext, useState,useEffect} from "react";
 import { Redirect } from "react-router-dom";
-import JoblyApi from "./api";
+import sfMuralsApi from "./api";
 import CurrentUserContext from "./CurrentUserContext";
 
 
@@ -53,6 +53,7 @@ const ProfileEditForm = () =>{
     }
 
     const handleSubmit = (e) =>{
+        e.preventDefault();
         let profileData = {
             firstName: formData.firstName,
             lastName: formData.lastName,
@@ -60,7 +61,9 @@ const ProfileEditForm = () =>{
             password: formData.password,
           };
          let username = user.currentUser.user.username
-        JoblyApi.update(username, profileData)        
+         
+            sfMuralsApi.update(username, profileData)
+            
         setFormData({ 
             email:"",
         firstName:"",

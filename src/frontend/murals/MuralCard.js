@@ -47,7 +47,7 @@ const MuralCard = ({values}) =>{
                                 <CardText> Year Painted {values.year} </CardText>
                                 <CardText> Address {values.muralAddress} </CardText>
                                 <CardText> Neighborhood {values.neighborhood} </CardText>
-                                <img src={values.img} style={{maxWidth:'100%'}}/>
+                                <img alt={`Mural by ${values.artist}`} src={values.img} style={{maxWidth:'100%'}}/>
 
 
                                 

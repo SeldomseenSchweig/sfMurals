@@ -9,24 +9,36 @@ import {
 
 
 const AdminMuralCard = ({values}) =>{
-
-
     
-
 
     
 
     const handleSubmit = (e) =>{
         e.preventDefault();
-        console.log('hello')
+
+        if(e.nativeEvent.submitter.name==='deny'){
+            values.deny(values.id)
+            
+        }
+        if(e.nativeEvent.submitter.name==='approve'){
+            values.approve({id:values.id,artist:values.artist,address:values.muralAddress,img:values.img})
+            
+        }
+        
+        
+    
+        
+        
     }
 
 
-            return(
 
+            return(
+                <form onSubmit={handleSubmit}>
                 < Card 
                                 className="my-2"
                                 color="primary"
+                                
                                 outline
                                 style={{
                                 color:"red" ,
@@ -34,26 +46,23 @@ const AdminMuralCard = ({values}) =>{
                                 borderWidth:"medium",
                                 borderStyle:'solid',
                                 width: "50%",
-                                margin:" 10px "}}>
+                                margin:" 10px "
+                                }} >
                             <CardHeader>
-                                {values.title}     
-
+                                {values.title}
                             </CardHeader>
                             <CardBody>
                             
                                 <CardText> Artist {values.artist}</CardText>
                                 <CardText> Address {values.muralAddress} </CardText>
-                                <img src={values.img} style={{maxWidth:'100%'}}/>
-
-
-                                
-                                
+                                <img alt={`Mural by ${values.artist}`} src={values.img} style={{maxWidth:'100%'}}/>
                             </CardBody>
-                            <form onSubmit={handleSubmit}>
-                          
-                            </form>
                             
                             </Card>
+                            <button name='deny'> Deny</button>
+                            <button name='approve'> Approve</button>
+            </form>
+
 
 
 

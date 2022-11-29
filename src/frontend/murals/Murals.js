@@ -1,4 +1,4 @@
-import React, {useState, useEffect,useContext } from 'react'
+import React, {useState,useContext } from 'react'
 import { Redirect } from 'react-router-dom';
 import CurrentUserContext from "../CurrentUserContext";
 import ReactPaginate from 'react-paginate';
@@ -14,35 +14,19 @@ import sfMuralsApi from '../api';
 
 
 
-const Murals = () => {
+const Murals = (values) => {
 
     const {currentUser} = useContext(CurrentUserContext)
     
     if(!currentUser){
         return <Redirect to="/"/>
     }
-    const [murals, setMurals] = useState([]);
+    
+let murals = values.values.murals ;
+let setMurals = values.values.setMurals;
 
 
 
-    useEffect(() => {
-
-        async function getMurals() {
-            try {
-                let murals = await sfMuralsApi.getMurals();
-                
-                setMurals(murals);    
-            } catch (error) {
-                console.log(error)
-                
-            }
-
-            
-        
-        }
-        getMurals();
-
-      }, []);
 
     async function search() {
         let murals = await sfMuralsApi.getMurals();
@@ -54,7 +38,6 @@ const Murals = () => {
         const pagesVisited = pageNumber * muralsPerPage
         
         const displayMurals = murals.slice(pagesVisited, pagesVisited + muralsPerPage)
-        console.log(displayMurals)
         const pageCount = Math.ceil(murals.length/muralsPerPage)
         const changePage = ({selected}) =>{
             setPageNumber(selected)
@@ -72,7 +55,7 @@ const Murals = () => {
                                  
                         {displayMurals.map(mural => (
                             
-                               <div className='flex-child'> 
+                               <div key={mural.id} className='flex-child'> 
                                    <MuralCard values={{
                                 muralAddress:mural.street_address,
                                 artist:mural.artist,

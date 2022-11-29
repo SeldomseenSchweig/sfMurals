@@ -10,13 +10,14 @@ const {
 
   class Mural{
 
-    static async create({ artist, street_address,neighborhood='', cultural_district='', long, lat,img}) {
+    static async create({ artist, street_address,year='',neighborhood='', cultural_district='', long=0, lat=0,img}) {
+
     
         const result = await db.query(
               `INSERT INTO murals
-               (artist, street_address, neighborhood, cultural_district, long, lat,img)
-               VALUES ($1, $2, $3, $4, $5)
-               RETURNING artist, street_address, year, neighborhood, cultural_district, long, lat, img`,
+               (artist, street_address,year,neighborhood, cultural_district, long, lat,img)
+               VALUES ($1, $2, $3,$4,$5,$6,$7,$8)
+               RETURNING id, artist, street_address, year, neighborhood, cultural_district, long, lat, img`,
             [
               artist,
               street_address,
@@ -53,7 +54,9 @@ const {
       }
 
       static async findSuggestedMurals() {
-        let query = `SELECT artist,
+        let query = `SELECT 
+                            id,
+                            artist,
                             street_address,
                             img,
                             user_id
@@ -119,6 +122,21 @@ const {
     
         return mural;
       }
+
+
+      static async deny(id){
+        console.log(id)
+
+        const result = await db.query(
+          `DELETE
+           FROM suggestedMurals
+           WHERE id = $1
+           RETURNING id`, [id]);
+    const mural = result.rows[0];
+
+    if (!mural) throw new NotFoundError(`No Mural: ${mural}`);
+  }
+
 
 
 

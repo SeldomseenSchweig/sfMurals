@@ -24,6 +24,8 @@ function App() {
 
   const [currentUser, setCurrentUser] = useState("");
   const [token, setToken] = useLocalStorage(TOKEN_STORAGE_ID);
+  const [suggestedMurals, setSuggestedMurals] = useState([]);
+  const [murals,setMurals] = useState([])
 
 useEffect(() => {
   if(token && token.token){
@@ -50,7 +52,6 @@ async function login (values){
 async function getUser(username){
   let user = await sfMuralsApi.getUser(username);
   setCurrentUser(user)
-  // setApplicationIds(new Set(user.user.applications))
 }
 
 function logout() {
@@ -60,18 +61,17 @@ function logout() {
   
 }
 async function suggest (values){
-  let mural = await sfMuralsApi.suggest(values);
-  
+  await sfMuralsApi.suggest(values);
 
+  
 }
-const [suggestedMurals, setSuggestedMurals] = useState([]);
 
 
 
 useEffect(() => {
 
 
-    async function getMurals() {
+    async function getSuggestedMurals() {
         try {
             let murals = await sfMuralsApi.getSuggestedMurals();
             
@@ -84,9 +84,45 @@ useEffect(() => {
         
     
     }
+    getSuggestedMurals();
+
+  }, [token]);
+
+  useEffect(() => {
+
+    async function getMurals() {
+        try {
+            let murals = await sfMuralsApi.getMurals();
+            
+            setMurals(murals);    
+        } catch (error) {
+            console.log(error)
+            
+        }
+
+        
+    
+    }
     getMurals();
 
   }, []);
+  
+
+  async function deny(id){
+    await sfMuralsApi.deleteSuggested(id)
+    let newMurals = await sfMuralsApi.getSuggestedMurals();
+      setSuggestedMurals(newMurals)
+  }
+  
+  async function approve(values){
+    await sfMuralsApi.approve(values);
+    await sfMuralsApi.deleteSuggested(values.id)
+    let newMurals = await sfMuralsApi.getSuggestedMurals();
+     setSuggestedMurals(newMurals)
+  }
+
+
+
 
 
   return (
@@ -100,7 +136,7 @@ useEffect(() => {
               <Home />
             </Route>
              <Route exact path="/murals">
-               <Murals />
+               <Murals values={{murals,setMurals}}/>
             </Route>
             <Route exact path="/profile">
               <ProfileEditForm />
@@ -115,7 +151,7 @@ useEffect(() => {
               <LoginForm login={login}/>
             </Route>
             <Route exact path="/adminMurals" >
-              <AdminMurals suggestedMurals={suggestedMurals} setSuggestedMurals={setSuggestedMurals}/>
+              <AdminMurals suggestedMurals={suggestedMurals} setSuggestedMurals={setSuggestedMurals} deny={deny} approve={approve}/>
             </Route>
             
             <Route>

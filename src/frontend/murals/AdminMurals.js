@@ -1,4 +1,4 @@
-import React, {useState, useEffect,useContext } from 'react'
+import React, {useState,useContext } from 'react'
 import { Redirect } from 'react-router-dom';
 import CurrentUserContext from "../CurrentUserContext";
 import ReactPaginate from 'react-paginate';
@@ -10,7 +10,7 @@ import SearchBar from '../SearchBar';
 import AdminMuralCard from './AdminMuralCard';
 
 
-const AdminMurals = ({suggestedMurals, setSuggestedMurals}) => {
+const AdminMurals = ({suggestedMurals, setSuggestedMurals, deny, approve }) => {
 
     const {currentUser} = useContext(CurrentUserContext)
     
@@ -32,7 +32,6 @@ const AdminMurals = ({suggestedMurals, setSuggestedMurals}) => {
         }
 
 
-
     return (
 
         <>
@@ -42,11 +41,16 @@ const AdminMurals = ({suggestedMurals, setSuggestedMurals}) => {
                                  
                         {displayMurals.map(mural => (
                             
-                               <div className='flex-child'> 
-                                   <AdminMuralCard values={{
-                                muralAddress:mural.street_address,
-                                artist:mural.artist,
-                                img:mural.img
+                               <div key={mural.id}className='flex-child'> 
+                                <AdminMuralCard values={{
+                                    id:mural.id,
+                                    muralAddress:mural.street_address,
+                                    artist:mural.artist,
+                                    img:mural.img,
+                                    setSuggestedMurals:setSuggestedMurals,
+                                    deny:deny,
+                                    suggestedMurals,
+                                    approve:approve
                                  }}/>
                                 </div>
 

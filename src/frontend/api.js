@@ -42,11 +42,11 @@ class sfMuralsApi {
 
   // Individual API routes
 
-  /** Get details on a company by handle. */
 
 
 
-  /** Get details on a all jobs. */
+
+  /** Get details on a suggested murals. */
 
   static async getSuggestedMurals(){
     let data = {}
@@ -69,6 +69,10 @@ class sfMuralsApi {
     
     return res;
   }
+
+
+  // users suggest murals to add to site
+
   static async suggest(values){
 
     let data = {
@@ -82,6 +86,33 @@ class sfMuralsApi {
   
   return res;
 }
+
+// admin denys suggested mural, deletes from suggestedMurals table
+
+static async deleteSuggested(id){
+  let data = {}
+
+  await this.request(`murals/${id}`,data,'delete')
+}
+
+static async approve(values){
+    
+  let data = {
+    artist:values.artist,
+    street_address:values.address,
+    img:values.img,
+
+  }
+
+  let res = this.request('murals', data, 'post' )
+return res  
+}
+
+
+
+
+
+
     /**register website */
 
   static async register(values){
@@ -95,7 +126,8 @@ class sfMuralsApi {
     }
 
     let res = this.request('auth/register', data, 'post' )
-  return res  }
+  return res  
+}
 
     /** login. */
 
@@ -131,12 +163,9 @@ class sfMuralsApi {
 
   // }
  
-  static async update (username,data){
-   
-
-  
-    let res = this.userRequest(`users/${username}`, data, 'patch')
-    console.log(res)
+  static async update(username,data){
+    console.log(data)
+    let res = this.request(`users/${username}`, data, 'patch')
     return res.user
 
 
@@ -145,7 +174,6 @@ class sfMuralsApi {
 
 
 }
-// for now, put token ("testuser" / "password" on class)
 
 
 
