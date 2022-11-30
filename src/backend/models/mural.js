@@ -86,6 +86,8 @@ const {
                             year, 
                             neighborhood,
                             cultural_district,
+                            long,
+                            lat,
                             img
                      FROM murals`;
   

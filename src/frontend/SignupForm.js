@@ -1,13 +1,22 @@
-import React, { useState } from "react";
+import { Alert } from "reactstrap";
+import React, { useState, useContext } from "react";
 import { useHistory } from 'react-router-dom';
+import { Redirect } from "react-router-dom";
+import CurrentUserContext from "./CurrentUserContext";
+
 
 import './form.css'
 
 
 
-const Signup = ({register}) =>{
-
+const Signup = ({register, errors,setErrors}) =>{
+    const {currentUser} = useContext(CurrentUserContext)
+    
+    if(currentUser){
+        return <Redirect to="/"/>
+    }
     const history = useHistory()
+    
 
     const initialState = {
         username:"",
@@ -30,17 +39,37 @@ const Signup = ({register}) =>{
 
     const handleSubmit = (e) =>{
         e.preventDefault();
-        
-        register(formData);
-        
-        setFormData(initialState);
-        history.push('/')
+       
+            let info = register(formData);
 
+            async function check(info){
+                await info.then(function(result){
+                    if(!result ){
+                        return
+                    }else{
+                        setErrors(result)
+                    }
+
+                })
+
+            }
+        check(info)
+
+
+        if(!errors[0]){
+        setFormData(initialState)
+        
+        }
+  
     }
 
 
-    return (
+    
 
+
+    return (
+        <>
+        {errors[0] ? <Alert key="warning" variant="warning"> {errors[0]} </Alert> :''}
         <form className="offset-lg-4" onSubmit={handleSubmit}>
             <div className="mb-3"> 
                 <label className="form-label" htmlFor="username"> Username</label>
@@ -119,6 +148,8 @@ const Signup = ({register}) =>{
 
             
         </form>
+        
+        </>
     )
 }
 export default Signup;

@@ -50,7 +50,11 @@ router.post("/register", async function (req, res, next) {
   try {
     const validator = jsonschema.validate(req.body, userRegisterSchema);
     if (!validator.valid) {
-      const errs = validator.errors.map(e => e.stack);
+      let errs = validator.errors.map(e => e.stack.replace('instance.',''));
+      // const newErr = errs.f(element => { 
+      //   let formattedString = element.replace('instance.','');
+      //   return  formattedString});
+      // console.log(newErr)
       throw new BadRequestError(errs);
     }
 

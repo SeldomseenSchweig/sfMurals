@@ -14,7 +14,7 @@ const SearchBar = ({search}) => {
     return(
         <form onSubmit={handleSubmit} >
         <label htmlFor="header-search">
-            <span className="visually-hidden">Search</span>
+            <span className="visually-hidden"></span>
         </label>
         <input onChange={handleChange} 
             type="text"
@@ -23,7 +23,7 @@ const SearchBar = ({search}) => {
             placeholder="search"
             name="search" 
         />
-        <button >Search</button>
+        <button >Search By Street</button>
     </form>
 
     )

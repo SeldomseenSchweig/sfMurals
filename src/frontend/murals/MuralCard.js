@@ -1,7 +1,6 @@
 import React from 'react'
 import { 
-    Card, 
-    CardHeader, 
+
     CardBody, 
     CardText 
 } from 'reactstrap';
@@ -9,19 +8,6 @@ import {
 
 
 const MuralCard = ({values}) =>{
-
-
-    
-
-
-    
-
-    const handleSubmit = (e) =>{
-        e.preventDefault();
-        console.log('hello')
-    }
-
-
             return(
                 <div className='flip-card' >
                 < div 
@@ -51,7 +37,9 @@ const MuralCard = ({values}) =>{
                             <img alt={`Mural by ${values.artist}`} src={values.img} style={{maxWidth:'100%'}}/>
 
                             </CardBody>
+
                             </div>
+
             </div>
 
                             

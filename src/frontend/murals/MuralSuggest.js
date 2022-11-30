@@ -40,10 +40,13 @@ const MuralSuggest =({suggest})=>{
 
 
     return (
-
-        <form onSubmit={handleSubmit} >
-            <label htmlFor='artist'> Artist Name</label>
-            <input 
+        <>
+        
+        <form className="offset-lg-4" onSubmit={handleSubmit} >
+        <div className="mb-3">
+            <label className="form-label" htmlFor='artist'> Artist Name </label>
+            <input
+            className="form-control i" 
             id='artist'
             name='artist'
             type='text'
@@ -51,8 +54,11 @@ const MuralSuggest =({suggest})=>{
             value={formData.artist}
             onChange={handleChange}
             />
+        </div>
+        <div className="mb-3">
             <label htmlFor='street_address'> Address </label>
-            <input 
+            <input
+            className="form-control i" 
             type="text"
             name='street_address'
             onChange={handleChange}
@@ -60,18 +66,24 @@ const MuralSuggest =({suggest})=>{
             id="street_address"
 
             />
+            </div>
+            <div className="mb-3">
+                <label htmlFor='img'> Image </label>
+                <input
+                className="form-control i"
+                type="text"
+                name='img'
+                onChange={handleChange}
+                value={formData.img}
+                id="img"
 
-            <label htmlFor='img'> Image </label>
-            <input 
-            type="text"
-            name='img'
-            onChange={handleChange}
-            value={formData.img}
-            id="img"
+                />
+            </div>
 
-            />
           <button>Submit</button>  
         </form>
+        </>
+        
     )
 
 

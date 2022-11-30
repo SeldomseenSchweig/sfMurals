@@ -14,7 +14,9 @@ import ProfileEditForm from "./Profile";
 import jwt from "jsonwebtoken";
 import CurrentUserContext from "./CurrentUserContext";
 import useLocalStorage from "./hooks/useLocalStorage";
+import { Alert } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { user } from "pg/lib/defaults";
 
 
 export const TOKEN_STORAGE_ID = "jobly-token";
@@ -26,6 +28,8 @@ function App() {
   const [token, setToken] = useLocalStorage(TOKEN_STORAGE_ID);
   const [suggestedMurals, setSuggestedMurals] = useState([]);
   const [murals,setMurals] = useState([])
+  const [errors,setErrors] = useState({})
+
 
 useEffect(() => {
   if(token && token.token){
@@ -45,7 +49,10 @@ useEffect(() => {
       setToken(new_token)
             
     } catch (error) {
+
       return error
+            
+      
         
     }
    
@@ -84,11 +91,15 @@ useEffect(() => {
 
     async function getSuggestedMurals() {
         try {
+          if(user.isAdmin){
             let murals = await sfMuralsApi.getSuggestedMurals();
             
             setSuggestedMurals(murals);    
+
+          }
+
         } catch (error) {
-            console.log(error)
+            
             
         }
 
@@ -136,7 +147,7 @@ useEffect(() => {
               <ProfileEditForm />
             </Route>
             <Route exact path="/signup">
-              <SignupForm register={register}/>
+              <SignupForm register={register} errors={errors} setErrors={setErrors}/>
             </Route>
             <Route exact path="/muralSuggest">
               <MuralSuggest suggest={suggest}/>

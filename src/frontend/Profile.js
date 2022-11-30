@@ -72,7 +72,7 @@ const ProfileEditForm = () =>{
 
 
     return (
-
+       
         <form className="offset-lg-4" onSubmit={handleSubmit}>
             <div className="mb-3"> 
                 <label className="form-label" htmlFor="username"> Username</label>
@@ -127,6 +127,8 @@ const ProfileEditForm = () =>{
 
             
         </form>
+ 
+       
     )
 
 

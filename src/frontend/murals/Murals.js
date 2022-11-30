@@ -65,6 +65,7 @@ useEffect(() => {
             setPageNumber(selected)
 
         }
+        console.log(displayMurals);
 
 
 
@@ -83,6 +84,8 @@ useEffect(() => {
                                 artist:mural.artist,
                                 year:mural.year,
                                 neighborhood:mural.neighborhood,
+                                long:mural.long,
+                                lat:mural.lat,
                                 img:mural.img
                                  }}/>
                                 </div>
