@@ -71,3 +71,6 @@ const AdminMuralCard = ({values}) =>{
     
 
         export default AdminMuralCard;
+
+
+ 

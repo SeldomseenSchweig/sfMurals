@@ -23,23 +23,16 @@ const MuralCard = ({values}) =>{
 
 
             return(
-
-                < Card 
-                                className="my-2"
-                                color="primary"
+                <div className='flip-card' >
+                < div 
+                                className="my-2 flip-card-inner "
+                                
                                 outline
                                 style={{
-                                color:"red" ,
-                                borderColor:"black",
-                                borderWidth:"medium",
-                                borderStyle:'solid',
-                                width: "50%",
+                                
                                 margin:" 10px "}}>
-                            <CardHeader>
-                                {values.title}     
 
-                            </CardHeader>
-                            <CardBody>
+                            <CardBody className='flip-card-back'>
                             
                                 <CardText> Artist {values.artist}</CardText>
                             
@@ -47,17 +40,21 @@ const MuralCard = ({values}) =>{
                                 <CardText> Year Painted {values.year} </CardText>
                                 <CardText> Address {values.muralAddress} </CardText>
                                 <CardText> Neighborhood {values.neighborhood} </CardText>
-                                <img alt={`Mural by ${values.artist}`} src={values.img} style={{maxWidth:'100%'}}/>
+                               
 
 
                                 
                                 
                             </CardBody>
-                            <form onSubmit={handleSubmit}>
                           
-                            </form>
+                            <CardBody className='flip-card-front'>
+                            <img alt={`Mural by ${values.artist}`} src={values.img} style={{maxWidth:'100%'}}/>
+
+                            </CardBody>
+                            </div>
+            </div>
+
                             
-                            </Card>
 
 
 
@@ -66,3 +63,7 @@ const MuralCard = ({values}) =>{
     
 
         export default MuralCard;
+
+
+
+       
