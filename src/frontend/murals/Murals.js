@@ -1,4 +1,4 @@
-import React, {useState,useContext } from 'react'
+import React, {useState,useContext, useEffect} from 'react'
 import { Redirect } from 'react-router-dom';
 import CurrentUserContext from "../CurrentUserContext";
 import ReactPaginate from 'react-paginate';
@@ -20,10 +20,32 @@ const Murals = (values) => {
     
     if(!currentUser){
         return <Redirect to="/"/>
+    }else{
+        
+        
     }
     
 let murals = values.values.murals ;
 let setMurals = values.values.setMurals;
+
+useEffect(() => {
+
+    async function getMurals() {
+        try {
+            let murals = await sfMuralsApi.getMurals();
+            
+            setMurals(murals);    
+        } catch (error) {
+            console.log(error)
+            
+        }
+
+        
+    
+    }
+    getMurals();
+
+  }, []);
 
 
 

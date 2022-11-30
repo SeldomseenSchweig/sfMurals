@@ -99,24 +99,7 @@ useEffect(() => {
 
   }, [token]);
 
-  useEffect(() => {
 
-    async function getMurals() {
-        try {
-            let murals = await sfMuralsApi.getMurals();
-            
-            setMurals(murals);    
-        } catch (error) {
-            console.log(error)
-            
-        }
-
-        
-    
-    }
-    getMurals();
-
-  }, []);
   
 
   async function deny(id){
