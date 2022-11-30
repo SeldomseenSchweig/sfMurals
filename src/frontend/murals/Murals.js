@@ -28,8 +28,8 @@ let setMurals = values.values.setMurals;
 
 
 
-    async function search() {
-        let murals = await sfMuralsApi.getMurals();
+    async function search(value) {
+        let murals = await sfMuralsApi.getMurals(value);
         setMurals(murals);
         }
 
@@ -50,13 +50,13 @@ let setMurals = values.values.setMurals;
 
         <>
         <SearchBar search={search} />
-        <div className='flex-parent' >
+        <div  className='flex-parent' >
             
                                  
                         {displayMurals.map(mural => (
                             
                                <div key={mural.id} className='flex-child'> 
-                                   <MuralCard values={{
+                                   <MuralCard  values={{
                                 muralAddress:mural.street_address,
                                 artist:mural.artist,
                                 year:mural.year,

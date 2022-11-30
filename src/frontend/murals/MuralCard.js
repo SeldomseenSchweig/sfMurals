@@ -27,7 +27,7 @@ const MuralCard = ({values}) =>{
                 < div 
                                 className="my-2 flip-card-inner "
                                 
-                                outline
+                                
                                 style={{
                                 
                                 margin:" 10px "}}>

@@ -59,13 +59,15 @@ class sfMuralsApi {
   return res;
 }
 
-    static async getMurals(){
+    static async getMurals(filter){
       let data = {}
-      if (data){
+      console.log(filter)
+      if (filter){
+        data = {street_address:filter}
         
       }
 
-    let res = await this.request(`murals`);
+    let res = await this.request(`murals`,data);
     
     return res;
   }

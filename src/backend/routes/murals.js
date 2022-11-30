@@ -70,7 +70,8 @@ router.post("/", ensureAdmin, async function (req, res, next) {
   router.get("/", async function (req, res, next) {
 
     try {
-      const murals = await Mural.findAll();
+      const q = req.query;
+      const murals = await Mural.findAll(q);
       return res.json( murals );
     } catch (err) {
       return next(err);

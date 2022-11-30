@@ -80,19 +80,34 @@ const {
        * Returns [{ artist, street_address, year, numEmployees, cultural_district }, ...]
        * */
     
-      static async findAll() {
+      static async findAll(searchFilters = {}) {
         let query = `SELECT artist,
                             street_address,
-                            year, neighborhood,
+                            year, 
+                            neighborhood,
                             cultural_district,
                             img
-                     FROM murals 
-                     ORDER BY artist`;
+                     FROM murals`;
   
         // Finalize query and return results
+
+    let whereExpressions = '';
+    let queryValues = [];
+
+    const {street_address} = searchFilters;
+    if (street_address) {
+      queryValues.push(`%${street_address}%`);
+      whereExpressions += (` WHERE street_address ILIKE $${queryValues.length}`);
+    }
+    if (whereExpressions.length > 0) {
+      query += whereExpressions;
+      
+    }else{
+      query+=' ORDER BY artist'
+    }
           
          
-        const muralsRes = await db.query(query);
+        const muralsRes = await db.query(query, queryValues);
         return muralsRes.rows;
       }
     

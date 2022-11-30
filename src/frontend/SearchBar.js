@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 
-const SearchBar = ({setState, search}) => {
+const SearchBar = ({search}) => {
     
     const [value , setValue] = useState('')
     const handleChange = (e)=>{
@@ -8,7 +8,6 @@ const SearchBar = ({setState, search}) => {
         }
     const handleSubmit = (e) =>{
             e.preventDefault()
-            console.log(value)
             search(value)
 
         }
