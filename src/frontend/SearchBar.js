@@ -12,7 +12,7 @@ const SearchBar = ({search}) => {
 
         }
     return(
-        <form onSubmit={handleSubmit} >
+        <form className='searchForm'onSubmit={handleSubmit} >
         <label htmlFor="header-search">
             <span className="visually-hidden"></span>
         </label>

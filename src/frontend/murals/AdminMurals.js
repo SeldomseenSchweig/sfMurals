@@ -6,7 +6,6 @@ import "./Murals.css";
 
 
 
-import SearchBar from '../SearchBar';
 import AdminMuralCard from './AdminMuralCard';
 
 
@@ -35,7 +34,6 @@ const AdminMurals = ({suggestedMurals, setSuggestedMurals, deny, approve }) => {
     return (
 
         <>
-        <SearchBar  />
         <div className='flex-parent' >
             
                                  

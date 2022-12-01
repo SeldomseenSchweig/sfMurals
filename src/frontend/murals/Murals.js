@@ -73,6 +73,20 @@ useEffect(() => {
 
         <>
         <SearchBar search={search} />
+        <div className='wrapper'>
+            <ReactPaginate
+                previousLabel={"Previous"}
+                nextLabel={"Next"}
+                pageCount={pageCount}
+                onPageChange={changePage}
+                containerClassName={"paginationBttns"}
+                previousLinkClassName={"previousBttn"}
+                nextLinkClassName={"nextBttn"}
+                disabledLinkClassName={"paginationDisabled"}
+                activeClassName={"paginationActive"}
+            />
+
+            </div>
         <div  className='flex-parent' >
             
                                  
@@ -93,23 +107,6 @@ useEffect(() => {
                             ))}
 
             </div>
-
-            <div>
-            <ReactPaginate
-                previousLabel={"Previous"}
-                nextLabel={"Next"}
-                pageCount={pageCount}
-                onPageChange={changePage}
-                containerClassName={"paginationBttns"}
-                previousLinkClassName={"previousBttn"}
-                nextLinkClassName={"nextBttn"}
-                disabledLinkClassName={"paginationDisabled"}
-                activeClassName={"paginationActive"}
-            />
-
-            </div>
-
-
 
             </>
 
