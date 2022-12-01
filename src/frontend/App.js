@@ -14,12 +14,11 @@ import ProfileEditForm from "./Profile";
 import jwt from "jsonwebtoken";
 import CurrentUserContext from "./CurrentUserContext";
 import useLocalStorage from "./hooks/useLocalStorage";
-import { Alert } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { user } from "pg/lib/defaults";
 
 
-export const TOKEN_STORAGE_ID = "jobly-token";
+export const TOKEN_STORAGE_ID = "sfMurals-token";
 
 
 function App() {
